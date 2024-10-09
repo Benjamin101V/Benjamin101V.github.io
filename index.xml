@@ -361,6 +361,8 @@
 3.在释放动态分配的内存后，将指针变量&lt;strong&gt;设置为NULL&lt;/strong&gt;&lt;br&gt;
 4.在使用指针变量之前，确保它指向一个有效的内存地址，即&lt;strong&gt;检查指针的有效性&lt;/strong&gt;&lt;br&gt;&lt;/p&gt;
 &lt;hr&gt;
+&lt;p&gt;部分文本参考：&lt;a class=&#34;link&#34; href=&#34;https://www.runoob.com/cprogramming/c-pointers.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;C 指针|菜鸟教程&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;end&#34;&gt;END
 &lt;/h2&gt;</description>
         </item>
