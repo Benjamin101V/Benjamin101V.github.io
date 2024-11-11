@@ -2,16 +2,16 @@
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="最近完成了 C 指针的初步学习，通过这篇博客记录一下\n作为C中一个十分重要的概念，指针在C中的应用实例可谓俯拾皆是。\n通过指针，可以简化一些 C 编程任务的执行，还有一些任务，如动态内存分配，没有指针是无法执行的。\n">
-<title>C 指针初阶</title>
+<title>C 指针</title>
 
-<link rel='canonical' href='https://Benjamin101V.github.io/p/c-%E6%8C%87%E9%92%88%E5%88%9D%E9%98%B6/'>
+<link rel='canonical' href='https://Benjamin101V.github.io/p/c-%E6%8C%87%E9%92%88/'>
 
-<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="C 指针初阶">
+<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="C 指针">
 <meta property='og:description' content="最近完成了 C 指针的初步学习，通过这篇博客记录一下\n作为C中一个十分重要的概念，指针在C中的应用实例可谓俯拾皆是。\n通过指针，可以简化一些 C 编程任务的执行，还有一些任务，如动态内存分配，没有指针是无法执行的。\n">
-<meta property='og:url' content='https://Benjamin101V.github.io/p/c-%E6%8C%87%E9%92%88%E5%88%9D%E9%98%B6/'>
+<meta property='og:url' content='https://Benjamin101V.github.io/p/c-%E6%8C%87%E9%92%88/'>
 <meta property='og:site_name' content='Benjamin_C'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C' /><meta property='article:published_time' content='2024-10-08T16:43:48&#43;08:00'/><meta property='article:modified_time' content='2024-10-08T16:43:48&#43;08:00'/>
-<meta name="twitter:title" content="C 指针初阶">
+<meta name="twitter:title" content="C 指针">
 <meta name="twitter:description" content="最近完成了 C 指针的初步学习，通过这篇博客记录一下\n作为C中一个十分重要的概念，指针在C中的应用实例可谓俯拾皆是。\n通过指针，可以简化一些 C 编程任务的执行，还有一些任务，如动态内存分配，没有指针是无法执行的。\n">
     </head>
     <body class="
@@ -268,18 +268,16 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#一个-c-指针实例">一个 C 指针实例</a></li>
-    <li><a href="#指针的概念">指针的概念</a></li>
-    <li><a href="#指针的使用">指针的使用</a></li>
-    <li><a href="#null-空指针">NULL （空指针）</a></li>
-    <li><a href="#野指针">野指针</a>
+    <li><a href="#c-指针初阶">C 指针初阶</a>
       <ol>
-        <li><a href="#1未初始化指针变量br">1&gt;未初始化指针变量<br></a></li>
-        <li><a href="#2指针越界访问br">2&gt;指针越界访问<br></a></li>
-        <li><a href="#3-指针指向的空间释放后未被设置成空指针br">3&gt; 指针指向的空间释放后未被设置成空指针<br></a></li>
-        <li><a href="#以下是一些规避野指针的方法br">以下是一些规避野指针的方法：<br></a></li>
+        <li><a href="#一个-c-指针实例">一个 C 指针实例</a></li>
+        <li><a href="#指针的概念">指针的概念</a></li>
+        <li><a href="#指针的使用">指针的使用</a></li>
+        <li><a href="#null-空指针">NULL （空指针）</a></li>
+        <li><a href="#野指针">野指针</a></li>
       </ol>
     </li>
+    <li><a href="#heading"></a></li>
     <li><a href="#end">END</a></li>
   </ol>
 </nav>
@@ -308,7 +306,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/c-%E6%8C%87%E9%92%88%E5%88%9D%E9%98%B6/">C 指针初阶</a>
+            <a href="/p/c-%E6%8C%87%E9%92%88/">C 指针</a>
         </h2>
     
         
@@ -363,8 +361,9 @@
     <p>最近完成了 C 指针的初步学习，通过这篇博客记录一下<br>
 作为C中一个十分重要的概念，指针在C中的应用实例可谓俯拾皆是。<br>
 通过指针，可以简化一些 C 编程任务的执行，还有一些任务，如动态内存分配，没有指针是无法执行的。<br></p>
-<h2 id="一个-c-指针实例">一个 C 指针实例
-</h2><div class="highlight"><div class="chroma">
+<h2 id="c-指针初阶">C 指针初阶
+</h2><h3 id="一个-c-指针实例">一个 C 指针实例
+</h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -414,8 +413,8 @@
 2&gt;每一个变量都有一个内存位置，每一个内存位置都定义了可使用 &amp; 运算符访问的地址，它表示 了在内存中的一个地址。<br></p>
 <p>在了解了内存地址的简单概念以及如何访问它后，我们便可以开始了解指针的概念了。</p>
 <hr>
-<h2 id="指针的概念">指针的概念
-</h2><p>在计算机科学中，指针（Pointer）是编程语言中的一个对象，利用地址，它的值直接指向
+<h3 id="指针的概念">指针的概念
+</h3><p>在计算机科学中，指针（Pointer）是编程语言中的一个对象，利用地址，它的值直接指向
 （points to）存在电脑存储器中另一个地方的值。由于通过地址能找到所需的变量单元，可以说，地址指向该变量单元。因此，将地址形象化的称为“指针”。意思是通过它能找到以它为地址的内存单元。<br>
 简单来说，指针其实就是内存地址，指针变量就是用于存放内存地址的变量。因此指针常用于内存地址的传递和变量的访问。<br>
 与其他变量相同，在使用指针变量前需要对其进行声明，声明方法如下：<br></p>
@@ -534,8 +533,8 @@
 </div><p>在调试过程中，注意在对 ip 和 ch 这两个指针变量进行解引用操作时观察内存监视窗口的变化<br></p>
 <p>需要额外注意的是，在不同的编程语言和平台上，指针的大小可能会有所不同，但通常在32位系统上是4字节，在64位系统上是8字节。<br></p>
 <hr>
-<h2 id="指针的使用">指针的使用
-</h2><div class="highlight"><div class="chroma">
+<h3 id="指针的使用">指针的使用
+</h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -586,8 +585,8 @@
 </div>
 </div><p>上面的实例涉及了以下这些操作：定义一个指针变量、把变量地址赋值给指针、访问指针变量中可用地址的值。在使用指针时我们会频繁进行这些操作。<br></p>
 <hr>
-<h2 id="null-空指针">NULL （空指针）
-</h2><p>NULL 指针是一个定义在标准库中的值为零的常量。</p>
+<h3 id="null-空指针">NULL （空指针）
+</h3><p>NULL 指针是一个定义在标准库中的值为零的常量。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -646,11 +645,11 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><hr>
-<h2 id="野指针">野指针
-</h2><p>顾名思义，<del>是一个野生的指针</del>  是指向位置不确定的指针变量，其值是内存中的随机地址，指向内存中的随机值，所以野指针具有不确定性————对其解引用就是访问一个不确定的地址，所以其结果是不可知的，<strong>可以是内存中的任何值</strong>。<br>
+<h3 id="野指针">野指针
+</h3><p>顾名思义，<del>是一个野生的指针</del>  是指向位置不确定的指针变量，其值是内存中的随机地址，指向内存中的随机值，所以野指针具有不确定性————对其解引用就是访问一个不确定的地址，所以其结果是不可知的，<strong>可以是内存中的任何值</strong>。<br>
 野指针通常由以下三种情况产生：<br></p>
-<h3 id="1未初始化指针变量br">1&gt;未初始化指针变量<br>
-</h3><div class="highlight"><div class="chroma">
+<p><strong>1&gt;未初始化指针变量</strong><br></p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -658,8 +657,8 @@
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="kt">int</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span> <span class="c1">//ptr未初始化，默认为随机值
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="2指针越界访问br">2&gt;指针越界访问<br>
-</h3><div class="highlight"><div class="chroma">
+</div><p><strong>2&gt;指针越界访问</strong><br></p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -699,17 +698,18 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>其中第六个元素“5”是<strong>内存中的随机值</strong>，是越界访问的结果。<br></p>
-<h3 id="3-指针指向的空间释放后未被设置成空指针br">3&gt; 指针指向的空间释放后未被设置成空指针<br>
-</h3><p>这属于动态内存模块的内容，详情后续会提到<br></p>
+<p><strong>3&gt; 指针指向的空间释放后未被设置成空指针</strong><br>
+这属于动态内存模块的内容，详情后续会提到<br></p>
 <p>由于其不确定性，野指针在程序中通常会引发一些意想不到的结果，甚至导致程序崩溃。因此，<strong>养成良好的编程习惯</strong>，规避野指针的产生就显得尤为重要。<br></p>
-<h3 id="以下是一些规避野指针的方法br">以下是一些规避野指针的方法：<br>
-</h3><p>1.在声明指针变量时立即<strong>初始化</strong>它，或者将其<strong>初始化为NULL</strong><br>
+<p><strong>以下是一些规避野指针的方法：</strong><br>
+1.在声明指针变量时立即<strong>初始化</strong>它，或者将其<strong>初始化为NULL</strong><br>
 2.避免指针的<strong>越界访问</strong><br>
 3.在释放动态分配的内存后，将指针变量<strong>设置为NULL</strong><br>
 4.在使用指针变量之前，确保它指向一个有效的内存地址，即<strong>检查指针的有效性</strong><br></p>
 <hr>
-<p>部分文本参考：<a class="link" href="https://www.runoob.com/cprogramming/c-pointers.html"  target="_blank" rel="noopener"
-    >C 指针|菜鸟教程</a></p>
+<h2 id="heading">
+</h2><p>参考资料：<a class="link" href="https://www.runoob.com/cprogramming/c-pointers.html"  target="_blank" rel="noopener"
+    >C 指针 | 菜鸟教程</a></p>
 <h2 id="end">END
 </h2>
 </section>
@@ -757,6 +757,34 @@
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/c-%E6%95%B0%E7%BB%84/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://krseoul.imgtbl.com/i/2024/11/11/6731b384b3c49.png" loading="lazy" data-key="" data-hash="https://krseoul.imgtbl.com/i/2024/11/11/6731b384b3c49.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C 数组</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
