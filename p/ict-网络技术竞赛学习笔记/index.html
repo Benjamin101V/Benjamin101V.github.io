@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="近期参加了 ICT 网络技术竞赛，关于赛前培训的学习笔记在这里记录一下。\n计算机网络基础及网络模拟器的初步认识（第一节） 初级名词解释 行业现状这里不再赘述，直接进入计算机网络基本名词的解释：\n1.数字信号：由二进制比特流组成，简单来说就是一连串的0和1。\n">
+<title>ICT 网络技术竞赛学习笔记</title>
+
+<link rel='canonical' href='https://Benjamin101V.github.io/p/ict-%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E7%AB%9E%E8%B5%9B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'>
+
+<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="ICT 网络技术竞赛学习笔记">
+<meta property='og:description' content="近期参加了 ICT 网络技术竞赛，关于赛前培训的学习笔记在这里记录一下。\n计算机网络基础及网络模拟器的初步认识（第一节） 初级名词解释 行业现状这里不再赘述，直接进入计算机网络基本名词的解释：\n1.数字信号：由二进制比特流组成，简单来说就是一连串的0和1。\n">
+<meta property='og:url' content='https://Benjamin101V.github.io/p/ict-%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E7%AB%9E%E8%B5%9B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'>
+<meta property='og:site_name' content='Benjamin_C'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='竞赛' /><meta property='article:tag' content='ICT技术' /><meta property='article:published_time' content='2024-11-27T21:31:12&#43;08:00'/><meta property='article:modified_time' content='2024-11-27T21:31:12&#43;08:00'/><meta property='og:image' content='https://krseoul.imgtbl.com/i/2024/11/27/6747235884102.jpg' />
+<meta name="twitter:title" content="ICT 网络技术竞赛学习笔记">
+<meta name="twitter:description" content="近期参加了 ICT 网络技术竞赛，关于赛前培训的学习笔记在这里记录一下。\n计算机网络基础及网络模拟器的初步认识（第一节） 初级名词解释 行业现状这里不再赘述，直接进入计算机网络基本名词的解释：\n1.数字信号：由二进制比特流组成，简单来说就是一连串的0和1。\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://krseoul.imgtbl.com/i/2024/11/27/6747235884102.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu14451878484101734961.png" width="300"
+                            height="295" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😅</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Benjamin_C</a></h1>
+            <h2 class="site-description">VIRTUALGUARD{}</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/Benjamin101V'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://Benjamin101V.github.io/en/" >English</option>
+                                
+                                    <option value="https://Benjamin101V.github.io/" selected>简体中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#计算机网络基础及网络模拟器的初步认识第一节">计算机网络基础及网络模拟器的初步认识（第一节）</a>
+      <ol>
+        <li><a href="#初级名词解释">初级名词解释</a></li>
+        <li><a href="#网络模拟器的初步认识及基础操作">网络模拟器的初步认识及基础操作</a>
+          <ol>
+            <li><a href="#环境及工具准备">环境及工具准备</a></li>
+            <li><a href="#路由器基础配置基础操作认识">路由器基础配置（基础操作认识）</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#heading"></a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/ict-%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E7%AB%9E%E8%B5%9B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                
+                    <img src="https://krseoul.imgtbl.com/i/2024/11/27/6747235884102.jpg" loading="lazy" alt="Featured image of post ICT 网络技术竞赛学习笔记" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" >
+                计算机网络
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/ict-%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E7%AB%9E%E8%B5%9B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">ICT 网络技术竞赛学习笔记</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Nov 27, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 8 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>近期参加了 ICT 网络技术竞赛，关于赛前培训的学习笔记在这里记录一下。<br></p>
+<h2 id="计算机网络基础及网络模拟器的初步认识第一节">计算机网络基础及网络模拟器的初步认识（第一节）
+</h2><h3 id="初级名词解释">初级名词解释
+</h3><p>行业现状这里不再赘述，直接进入计算机网络基本名词的解释：<br></p>
+<p><strong>1.数字信号</strong>：由二进制比特流组成，简单来说就是一连串的<strong>0和1</strong>。<br></p>
+<p><strong>2.LAN（局域网）</strong>：<del>是一种在特定区域内由多台计算机设备（如服务器、工作站）通过线缆（如同轴线缆、双绞线、光缆等）连接起来实现的资源共享的计算机网络</del><br>忽略上面这些繁琐的解释，目前我们只需要知道一切能上网的智能化终端设备（如📱、💻）都处于局域网内。常见的局域网相信会上网的人都耳熟能详，如家庭网、校园网、企业网、园区网等。<br></p>
+<p><strong>3.MAN（城域网）</strong>：是一种覆盖城市或大型城镇区域的计算机网络，通常用于连接城市内的不同地点，如企业、学校、医院等。简单来说，城域网就是用于连接一个城市内部不同局域网的网络。<br></p>
+<p><strong>4.WAN（广域网）</strong>；跨越地理位置的综合型网络，通常跨越不同国家甚至各大洲，<del>使用公共网络（如互联网）或专用网络（如MPLS）连接不同的网络节点</del> 目前世界上最大的广域网是<strong>Internet（因特网）</strong>。</p>
+<p>在日常生活中，我们常说的上网冲浪指的就是在一个局域网内通过链接到广域网来获取到各个城域网乃至其他局域网内部的网络资源；上网上网，上的就是广域网。因此，我们可以简单理解为 ICT（Information and Communication Technology，信息与通信技术）网络技术所研究的就是<strong>广域网的接入技术</strong>。<br></p>
+<p><img src="https://krseoul.imgtbl.com/i/2024/11/27/6747300492191.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Internet"
+	
+	
+><br></p>
+<p>图片来源：<a class="link" href="https://taogenjia.com/2019/09/05/computer-network-4-network-layer/"  target="_blank" rel="noopener"
+    >深入理解计算机网络（四）：网络层 | Taogen&rsquo;s Blog</a><br></p>
+<p><strong>5.网络适配器</strong>：俗称“网卡”，一种硬件设备，用于将计算机或其他设备连接到网络。终端需要基于网络适配器进行上网。网络适配器有以太网网络适配器（以太网卡）、无线网网络适配器（无线网卡）、虚拟网网络适配器（虚拟网卡）三类。<br>
+在Windows终端中键入<code>ipconfig</code>（linux/unix键入<code>ifconfig</code>或<code>ip</code>）可以查看设备的网络配置信息：<br></p>
+<p><img src="https://krseoul.imgtbl.com/i/2024/11/27/674733011b11e.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="NIC"
+	
+	
+></p>
+<p><strong>6.实现用户上网的条件</strong><br>
+&lt;1&gt; <strong>物理条件</strong>：传递信号的介质，如网线、光纤、电话线、电磁波（无线信号）<br>
+&lt;2&gt; <strong>网络通信协议</strong>：TCP/IP（Transmission Control Protocol / Internet Protocol，传输控制协议/网际协议）协议族，详细介绍可以参考 <a class="link" href="https://www.runoob.com/tcpip/tcpip-intro.html"  target="_blank" rel="noopener"
+    >TCP/IP介绍 | 菜鸟教程</a><br></p>
+<p><strong>7.IP 地址</strong>：在网络中用于唯一标识一台网络设备。由于 IPv6（Internet Protocol Version 6）尚未普及，现在我们常说的 IP 地址通常指 IPv4（Internet Protocol Version 4）地址。通常以<strong>三点分十进制数</strong>形式表示，如 <code>192.168.1.1</code> 。但计算机内部只能存储二进制数据，故其原型由<strong>32位二进制数组成</strong> 。如上面提到的<code>192.168.1.1</code>，可通过以下方法快速转换为二进制数：<br>
+已知存在以下关系</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">0000 0001 == 1 == 2^0
+</span></span><span class="line"><span class="cl">0000 0010 == 2 == 2^1
+</span></span><span class="line"><span class="cl">0000 0100 == 4 == 2^2
+</span></span><span class="line"><span class="cl">0000 1000 == 8 == 2^3
+</span></span><span class="line"><span class="cl">0001 0000 == 16 == 2^4
+</span></span><span class="line"><span class="cl">0010 0000 == 32 == 2^5
+</span></span><span class="line"><span class="cl">0100 0000 == 64 == 2^6
+</span></span><span class="line"><span class="cl">1000 0000 == 128 == 2^7
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>第一位十进制数 <code>192</code> = <code>128</code> + <code>64</code>，可以快速得出其二进制形式 <code>1100 0000</code> 。<br>以此类推：<br></p>
+<p><code>168</code> = <code>128</code> + <code>32</code> + <code>8</code> ==&gt; <code>1010 1000</code> <br></p>
+<p><code>1</code> ==&gt; <code>0000 0001</code> <br></p>
+<p>所以 <code>192.168.1.1</code> 在计算机中储存的值就是 <code>1100 0000.1010 1000.0000 0001.0000 0001</code> <br></p>
+<p><strong>8.IP 地址配置规则</strong><br>
+从上面 IP 地址的二进制形式我们可以很容易得出，其十进制形式的取值范围在<strong>0 ~ 255</strong>之间。但在配置 IP 地址时，并不是每一个数值都可以使用。<br>
+在配置 IP 地址时，我们需要遵循以下规则：<br></p>
+<p>&lt;1&gt; 首位的取值范围在<strong>1~223</strong>之间<br>
+&lt;2&gt; 中间两位的取值范围在<strong>0~255</strong>之间<br>
+&lt;3&gt; 末尾的取值范围在<strong>1~254</strong>之间<br></p>
+<p>具体原因如下：<br></p>
+<p>首先需要知道，末尾为0的 IP 表示网络的起始地址，通常会用于标识整个网络。在 IP 地址中，网络地址和主机地址是分开的，<strong>网络地址</strong>用于标识网络，而<strong>主机地址</strong>用于标识网络中的设备。为避免混淆，IP 地址末尾不为0便成为了一种约定俗成的做法；而末尾为255的 IP 地址则用于广播（允许数据从一个源发送到网络中的所有设备），被称为<strong>广播地址</strong>，末尾不为255同样是为了避免混淆不同标识功能的 IP 地址。<br></p>
+<p>至于首位的范围，则需要引入<strong>IP 地址的分类</strong>来解释：<br></p>
+<p>在 IPv4 中，我们以首位的取值范围为标准将 IP 地址分为 <code>A、B、C、D、E</code> 五大类：</p>
+<p><strong>A类地址</strong>：首位的范围在<strong>1~126</strong>之间<br>
+<strong>B类地址</strong>：首位的范围在<strong>128~191</strong>之间<br>
+<strong>C类地址</strong>：首位的范围在<strong>192~223</strong>之间<br></p>
+<p><strong>D类地址</strong>：首位的范围在<strong>224~239</strong>之间<br>
+<strong>E类地址</strong>：首位的范围在<strong>240~255</strong>之间<br></p>
+<p>其中，D类地址用于组播（允许数据从一个源发送到多个接收者）、E类地址用于科研，这两类地址<strong>不能私下使用</strong> 。因此，在设置 IP 地址时，首位的范围在1~223之间。<br></p>
+<p><strong>9.IP 地址的结构</strong><br>
+针对 IP 地址本身，我们根据各部分标识功能的差异将其细分为<strong>网络位</strong>和<strong>主机位</strong>：<br></p>
+<p><strong>网络位</strong>：用于标识整个网络，是一个范围。如 <code>192.168.10.100</code> 的网络位是 <code>192.168.10</code>，表示网络地址 （<em>注意，这里所提到的“网络地址”和上面提到的“用于标识整个网络的‘网络地址（起始地址）’”并不是同一个概念</em>） 为<code>192.168.10.0</code>~<code>192.168.1.255</code>的所以网络设备组成的通信网络。这就是上面所提到的，<strong>IP 地址末尾不为0</strong>的原因。<br>
+<strong>主机位</strong>：网络中主机的标识，具体到一个网络中的一个用户。如上面的 IP 地址主机位为<code>100</code> 。<br>
+我们可以将网络位简单理解为一个 IP 地址的“姓”，而主机位就是它的“名”。<br></p>
+<p>在不同种类的 IP 地址中，不同网络所拥有网络地址数量也不同。<br>
+例如：<br>
+对于A类地址 <code>10.100.100.100</code> ，其网络位是 <code>10.0.0.0</code> 。因此，算上起始地址和广播地址，<strong>单个A类地址在网络中所拥有的地址数量就是256^3=2^24</strong> 。<br>
+同理，对于B类地址 <code>172.16.100.100</code> ，其网络位是 <code>172.16.0.0</code> ，则<strong>单个B类地址在网络中拥有256^2=2^16个网络地址</strong> ；<br><strong>单个C类地址在网络中拥有256^1=2^8个网络地址</strong> 。<br></p>
+<p>是否感觉有一些混乱？<del>计算机也怎么觉得</del><br>
+因此，为了准确标识一个 IP 地址所处的网络范围，我们引入<strong>子网掩码</strong>这个概念。<br>
+子网掩码通常与 IP 地址成对出现，在给网络设备配置 IP 地址时，后面必须配上子网掩码，<strong>否则 IP 无效</strong> 。</p>
+<p>一个 IP 地址可以拥有不同的子网掩码，以标识它们处于不同的网络范围。<br>
+对于A、B、C三类地址，它们默认的子网掩码分别是 <code>255.0.0.0</code>、<code>255.255.0.0</code>、<code>255.255.255.0</code>。<br></p>
+<p>那么子网掩码如何标识一个 IP 地址所处的网络范围呢？<br>
+将一个 IP 地址和其子网掩码做与运算，我们可以得到这个 IP 地址的<strong>网络号</strong>（注意其与网络位的区分）。<br>
+如 <code>10.1.1.1</code> 与 <code>10.2.2.2</code>，使用它们默认的子网掩码 <code>255.0.0.0</code> ，分别对它们进行与运算：<br></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">        <span class="mo">0000</span> <span class="mf">1010.0000</span> <span class="mf">0001.0000</span> <span class="mf">0001.0000</span> <span class="mo">0001</span>
+</span></span><span class="line"><span class="cl">       <span class="o">&amp;</span><span class="mi">1111</span> <span class="mf">1111.0000</span> <span class="mf">0000.0000</span> <span class="mf">0000.0000</span> <span class="mo">0000</span>
+</span></span><span class="line"><span class="cl">       <span class="n">________________________________________</span>
+</span></span><span class="line"><span class="cl">        <span class="mo">0000</span> <span class="mf">1010.0000</span> <span class="mf">0000.0000</span> <span class="mf">0000.0000</span> <span class="mo">0000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="mo">0000</span> <span class="mf">1010.0000</span> <span class="mf">0010.0000</span> <span class="mf">0010.0000</span> <span class="mo">0010</span>
+</span></span><span class="line"><span class="cl">       <span class="o">&amp;</span><span class="mi">1111</span> <span class="mf">1111.0000</span> <span class="mf">0000.0000</span> <span class="mf">0000.0000</span> <span class="mo">0000</span>
+</span></span><span class="line"><span class="cl">       <span class="n">________________________________________</span>
+</span></span><span class="line"><span class="cl">        <span class="mo">0000</span> <span class="mf">1010.0000</span> <span class="mf">0000.0000</span> <span class="mf">0000.0000</span> <span class="mo">0000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*如果采用默认的子网掩码，在运算过程中，我们可以通过“遇到掩码255时不变；遇到掩码为0时为0”的结论来简化运算*/</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>进制转换后，结果均为 <code>10.0.0.0</code> ，代表二者的网络号一致。<strong>当两个 IP 地址的网络号相同时，就代表它们处于一个相同的网络范围，可以相互通信</strong> 。</p>
+<p>另外，在配置网络信息的过程中，我们常常会看到类似于 <code>192.168.1.1/24</code>、<code>172.10.12.100/16</code>、<code>10.1.1.1/8</code> 等这样 <code>IPv4地址</code>+<code>/</code>+<code>n</code> 的地址格式，其中<code>/</code> 后的数值 <code>n</code> 被称为<strong>前缀长度</strong>，表示表示子网掩码的前 n 位是 <code>1</code>，其余位是 <code>0</code> 。</p>
+<p><strong>10.三大基本网络设备</strong>：</p>
+<p><strong>路由器（Router）</strong>：连接广域网的设备<br>
+<strong>交换机（Switch）</strong>：连接局域网的设备，接口多，可使多台终端设备接入<br>
+<strong>调制解调器（Modren）</strong>：数字信号转换为模拟信号（调制）以便通过电话线传输，同时将接收到的模拟信号转换回数字信号（解调）。我们耳熟能详的<strong>光猫</strong>就是调制解调器的一种，全称为光网络调制解调器（Optical Network Modem，简称ONU），用于光信号和电子信号的相互转换<br></p>
+<h3 id="网络模拟器的初步认识及基础操作">网络模拟器的初步认识及基础操作
+</h3><h4 id="环境及工具准备">环境及工具准备
+</h4><p>这里我们使用 <strong>Cisco Packet Tracer（思科模拟器）</strong> 进行网络环境的模拟搭建。<br>其工作区界面示例（v8.2.2）如下：<br></p>
+<p><img src="https://krseoul.imgtbl.com/i/2024/11/29/6749da09d67af.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Cisco Packet Tracer"
+	
+	
+></p>
+<p>工具的下载和汉化以及汉化后可能出现的问题这里给出以下参考链接：<br></p>
+<p><a class="link" href="https://www.netacad.com/resources/lab-downloads?courseLang=en-US"  target="_blank" rel="noopener"
+    >最新版下载链接（v8.2.2）</a><br>
+<a class="link" href="https://github.com/zryyyy/Cisco-Packet-Tracer-Chinese"  target="_blank" rel="noopener"
+    >汉化项目链接</a><br>
+<a class="link" href="https://www.cnblogs.com/zyc-666/p/16802566.html"  target="_blank" rel="noopener"
+    >Packet Tracer更改字体后命令行黑屏问题解决 | zyc666</a><br></p>
+<p>具体过程这里不再赘述。<br></p>
+<h4 id="路由器基础配置基础操作认识">路由器基础配置（基础操作认识）
+</h4><p>首先来到网络设备一栏，选择路由器型号，这里我们使用1841型：<br></p>
+<p><img src="https://krseoul.imgtbl.com/i/2024/11/29/6749e19edfb87.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Cisco Packet Tracer_1"
+	
+	
+></p>
+<p>放置两个待连接的路由器后，我们选择连接线路,这里选择自动选择连接类型：<br></p>
+<p><img src="https://krseoul.imgtbl.com/i/2024/11/29/6749e275a4955.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Cisco Packet Tracer_2"
+	
+	
+></p>
+<p>点击路由器进行连接后，在两个路由器的连接接口出会显示端口信息（需要在设置中进行设置，详情这里不赘述）。点击其中一个路由器进入其命令行界面（IOS）对其进行网络配置：<br></p>
+<p>在配置前我们需要首先了解一下设备的几个基本模式：<br></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hostname&gt;               //用户模式，用于衡量一台设备是否正常运行
+</span></span><span class="line"><span class="cl">hostname#               //特权模式，用于通信测试（通常使用 ping 指令）
+</span></span><span class="line"><span class="cl">hostname(config)#       //全局配置模式，可进行功能性代码的配置
+</span></span><span class="line"><span class="cl">hostname(config-if)#    //端口配置模式，可进行端口的信息及状态配置
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><a class="link" href="https://krseoul.imgtbl.com/i/2024/11/30/6749e5be24c77.png"  target="_blank" rel="noopener"
+    ><img src="https://krseoul.imgtbl.com/i/2024/11/30/6749e5be24c77.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Cisco Packet Tracer_3"
+	
+	
+></a><br></p>
+<p>配置命令如下:<br></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hostname&gt;en                                     //进入特权模式
+</span></span><span class="line"><span class="cl">hostname#configure terminal                     //进入全局配置模式
+</span></span><span class="line"><span class="cl">hostname(config)#int f0/0                       //进入端口配置模式
+</span></span><span class="line"><span class="cl">hostname(config-if)#no shutdown                 //启用端口
+</span></span><span class="line"><span class="cl">hostname(config-if)#ip add 10.1.1.1 255.0.0.0   //配置ip和子网掩码
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此外，还有一些常见命令需要掌握：<br></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hostname(config)#hostname FJUT_1                //配置主机名
+</span></span><span class="line"><span class="cl">hostname(config-if)#no ip address [ip-address]  //删除地址
+</span></span><span class="line"><span class="cl">#exit                                           //返回上一级
+</span></span><span class="line"><span class="cl">#end                                            //返回全局配置模式
+</span></span><span class="line"><span class="cl">?                                               //帮助信息
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>命令可简写，且可使用<code>Tab</code>键补全。<br></p>
+<p>对另一台路由器进行类似配置，配置完成后可以发现端口颜色由红色变为了绿色（将两个端口全部启用后就会改变）。将鼠标悬停在设备上能够看到设备信息：<br></p>
+<p><a class="link" href="https://krseoul.imgtbl.com/i/2024/11/30/6749edc253a9e.png"  target="_blank" rel="noopener"
+    ><img src="https://krseoul.imgtbl.com/i/2024/11/30/6749edc253a9e.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Cisco Packet Tracer_4"
+	
+	
+></a><br></p>
+<p>配置完成后，我们键入 <code>ping [ip-address]</code> 指令进行通信测试，出现以下结果说明配置成功：<br></p>
+<p><a class="link" href="https://krseoul.imgtbl.com/i/2024/11/30/6749ef728b60e.png"  target="_blank" rel="noopener"
+    ><img src="https://krseoul.imgtbl.com/i/2024/11/30/6749ef728b60e.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Cisco Packet Tracer_5"
+	
+	
+></a></p>
+<p>这里说明一下，第一次之所以会出现丢包25%的情况，简单理解是因为路由器连接时需要先进行探路测试，这个包就是被丢出去就是用于“探路”的。<br></p>
+<h2 id="heading">
+</h2>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%AB%9E%E8%B5%9B/">竞赛</a>
+        
+            <a href="/tags/ict%E6%8A%80%E6%9C%AF/">ICT技术</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2024 Benjamin_C
+    </section>
+    
+    <section class="powerby">
+        
+            benjamin_c@qq.com <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
