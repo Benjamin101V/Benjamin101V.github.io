@@ -93,7 +93,8 @@
 &lt;strong&gt;C类地址&lt;/strong&gt;：首位的范围在&lt;strong&gt;192~223&lt;/strong&gt;之间&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;D类地址&lt;/strong&gt;：首位的范围在&lt;strong&gt;224~239&lt;/strong&gt;之间&lt;br&gt;
 &lt;strong&gt;E类地址&lt;/strong&gt;：首位的范围在&lt;strong&gt;240~255&lt;/strong&gt;之间&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;其中，D类地址用于组播（允许数据从一个源发送到多个接收者）、E类地址用于科研，这两类地址&lt;strong&gt;不能私下使用&lt;/strong&gt; 。因此，在设置 IP 地址时，首位的范围在1~223之间。&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;其中，D类地址用于组播（允许数据从一个源发送到多个接收者）、E类地址用于科研，这两类地址&lt;strong&gt;不能私下使用&lt;/strong&gt; 。因此，在设置 IP 地址时，首位的范围在1~223之间（需要排除三个特殊地址段，详情可参考 &lt;em&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1Rx421m7xL/?spm_id_from=333.1007.top_right_bar_window_history.content.click&amp;amp;vd_source=bf4f387b9668a681bfdcd3b4b0a3b4ee&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;被保留的5个特殊地址段&lt;/a&gt;&lt;/em&gt;）。&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;9.IP 地址的结构&lt;/strong&gt;&lt;br&gt;
 针对 IP 地址本身，我们根据各部分标识功能的差异将其细分为&lt;strong&gt;网络位&lt;/strong&gt;和&lt;strong&gt;主机位&lt;/strong&gt;：&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;网络位&lt;/strong&gt;：用于标识整个网络，是一个范围。如 &lt;code&gt;192.168.10.100&lt;/code&gt; 的网络位是 &lt;code&gt;192.168.10&lt;/code&gt;，表示网络地址 （&lt;em&gt;注意，这里所提到的“网络地址”和上面提到的“用于标识整个网络的‘网络地址（起始地址）’”并不是同一个概念&lt;/em&gt;） 为&lt;code&gt;192.168.10.0&lt;/code&gt;~&lt;code&gt;192.168.1.255&lt;/code&gt;的所以网络设备组成的通信网络。这就是上面所提到的，&lt;strong&gt;IP 地址末尾不为0&lt;/strong&gt;的原因。&lt;br&gt;
