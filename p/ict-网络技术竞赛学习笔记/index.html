@@ -280,6 +280,22 @@
         </li>
       </ol>
     </li>
+    <li><a href="#连接线路及-dhcp-配置第二节">连接线路及 DHCP 配置（第二节）</a>
+      <ol>
+        <li><a href="#名词解释">名词解释</a>
+          <ol>
+            <li><a href="#网线">网线</a></li>
+            <li><a href="#网关">网关</a></li>
+          </ol>
+        </li>
+        <li><a href="#dhcp-模拟配置">DHCP 模拟配置</a>
+          <ol>
+            <li><a href="#终端设备联网四大基本参数">终端设备联网四大基本参数</a></li>
+            <li><a href="#模拟操作">模拟操作</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
     <li><a href="#heading"></a></li>
   </ol>
 </nav>
@@ -353,7 +369,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 8 分钟
+                    阅读时长: 13 分钟
                 </time>
             </div>
         
@@ -631,7 +647,640 @@
 	
 	
 ></a></p>
-<p>这里说明一下，第一次之所以会出现丢包25%的情况，简单理解是因为路由器连接时需要先进行探路测试，这个包就是被丢出去就是用于“探路”的。<br></p>
+<p><em>第一节完</em></p>
+<h2 id="连接线路及-dhcp-配置第二节">连接线路及 DHCP 配置（第二节）
+</h2><h3 id="名词解释">名词解释
+</h3><h4 id="网线">网线
+</h4><p>连接各个网络设备的线路被称为网线，学名<strong>双绞线</strong> ，由两根绝缘铜线紧密相绕组成，<del>以减少电磁干扰（EMI）和射频干扰（RFI）</del>。<br>
+我们将其分为<strong>直通线</strong>和<strong>交叉线</strong><br></p>
+<p>其中，从不同的角度来看，这两类双绞线有以下特点：<br></p>
+<p><strong>1.根据连接对象的类型</strong>：<br>
+<strong>直通线</strong>：在模拟器上体现为一条直实线，用于<strong>连接不同种类的网络设备</strong>。如路由器-交换机、交换机-PC等。<br>
+<strong>交叉线</strong>：在模拟器上体现为一条直虚线，拥有<strong>连接相同种类的网络设备</strong>。如路由器-路由器、交换机-交换机、路由器-PC（这二者均具有网络适配器，被划分为相同种类）等。<br></p>
+<p><strong>2.根据网线两端线缆的排布顺序</strong>：<br>
+线序1：白橙 橙 白绿 蓝 白蓝 绿 白棕 棕<br>
+线序2：白绿 绿 白橙 蓝 白蓝 橙 白棕 棕<br>
+<strong>直通线</strong>：1-1 或 2-2<br>
+<strong>交叉线</strong>：1-2<br></p>
+<h4 id="网关">网关
+</h4><p>首先来看一个配置实例：<br>
+在模拟器中，我们放置一个1841型路由器，并进入其 <code>f0/0</code> 端口进行配置，配置命令如下：<br></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Router&gt;en
+</span></span><span class="line"><span class="cl">Router#conf t
+</span></span><span class="line"><span class="cl">Enter configuration commands, one per line.  End with CNTL/Z.
+</span></span><span class="line"><span class="cl">Router(config)#int f0/0
+</span></span><span class="line"><span class="cl">Router(config-if)#no shutdown
+</span></span><span class="line"><span class="cl">%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+</span></span><span class="line"><span class="cl">Router(config-if)#ip address 192.168.10.1 255.255.255.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>键入 <code>exit</code> 回到全局配置模式，然后键入 <code>int f0/1</code> 进入另一个端口进行类似配置，将 IP 和子网掩码设置为 <code>192.168.10.2/24</code> 。<br>
+按下回车后会出现如下报错：<br></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Router(config)#int f0/1
+</span></span><span class="line"><span class="cl">Router(config-if)#ip add
+</span></span><span class="line"><span class="cl">Router(config-if)#ip address 192.168.10.2 255.255.255.0
+</span></span><span class="line"><span class="cl">% 192.168.10.0 overlaps with FastEthernet0/0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个报错的意思是 <code>192.168.10.0</code> 这个网段已经被 <code> f0/0</code> 接口占用了。<br>
+注意：<strong>一台路由器上的不同接口不能配置相同的网段</strong> 。而处于不同网段的网络设备又不能直接通信，这时我们就需要一个能够实现跨网段通信的介质，于是，网关应运而生。<br></p>
+<p><strong>网关</strong>，网络中一个非常重要的概念，<strong>终端设备联网四大基本参数之一</strong>，通常指的是网络中的一个设备或软件，用于<strong>连接不同的网络或网络协议</strong>。主要功能是作为两个网络之间的桥梁，实现数据的传输和转发。我们可以将其简单理解为网络通信界的中转站（路由器网关）或海关（防火墙网关等）。<br></p>
+<p>网关的本质是一个已存在的 IP 地址，在配置过程中，我们通常将距离 PC 最近的路由器接口的 IP 地址配置为本台 PC 的<strong>默认网关</strong> 。<br></p>
+<h3 id="dhcp-模拟配置">DHCP 模拟配置
+</h3><p>DHCP（Dynamic Host Configuration Protocol）是一种网络协议，用于<strong>自动分配IP地址和其他网络配置参数给网络设备</strong>，如计算机、打印机等。DHCP服务器负责管理IP地址池，并在设备首次连接到网络时，自动为设备分配IP地址和其他网络参数。<br></p>
+<h4 id="终端设备联网四大基本参数">终端设备联网四大基本参数
+</h4><p>配置前我们需要首先了解以下参数：<br>
+<strong>IP 地址（ip address）</strong>：<strong>标识网络设备身份</strong>，用于路由和定位数据包，确保数据能够正确地传输到目标设备。<br></p>
+<p><strong>子网掩码（Subnet Mask）</strong>：用于将IP地址划分为网络部分和主机部分，<strong>标识网络设备所处的网络范围</strong>，帮助路由器确定哪些设备属于同一个子网，从而决定是否转发数据包。<br></p>
+<p><strong>默认网关（Default Gateway）</strong>：网络中的一个设备或路由器，用于连接不同的网络或互联网，<strong>实现跨网段通信</strong> 。<br></p>
+<p><strong>域名服务器（DNS Server）</strong>：用于将域名（如www.example.com）转换为IP地址，<strong>将域名和IP地址相互映射</strong>，使得用户可以通过易于记忆的域名访问互联网上的资源，而不是记住复杂的IP地址。<strong>DNS只影响上网方式不影响上网结果</strong> 。<br></p>
+<h4 id="模拟操作">模拟操作
+</h4><p>进入模拟器，选择一台1841型路由器和两台终端设备，并使用交叉线将它们串联：<br></p>
+<p><img src="https://krseoul.imgtbl.com/i/2024/12/01/674c19bb573ec.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Cisco_2_2.png"
+	
+	
+><br></p>
+<p>然后再选择一条 <strong>console线</strong> 将一台终端设备和路由器相连接：<br></p>
+<p><img src="https://krseoul.imgtbl.com/i/2024/12/01/674c19baf33fa.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Cisco_2_1.png"
+	
+	
+><br></p>
+<p>连接后的效果如下图：<br></p>
+<p><img src="https://krseoul.imgtbl.com/i/2024/12/01/674c19bb8444f.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Cisco_2_3.png"
+	
+	
+><br></p>
+<p>随后点击与使用console线与路由器相连的终端设备，进入桌面 &raquo; 终端 ，可以看到与路由器命令行配置界面相同的界面。<br></p>
+<p>按照先前学过的知识对路由器 <code>f0/0</code> 接口的 IP 信息进行配置：<br></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Router&gt;en
+</span></span><span class="line"><span class="cl">Router#conf t
+</span></span><span class="line"><span class="cl">Enter configuration commands, one per line.  End with CNTL/Z.
+</span></span><span class="line"><span class="cl">Router(config)#int f0/0
+</span></span><span class="line"><span class="cl">Router(config-if)#no shu
+</span></span><span class="line"><span class="cl">Router(config-if)#no shutdown 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Router(config-if)#
+</span></span><span class="line"><span class="cl">%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Router(config-if)#ip add
+</span></span><span class="line"><span class="cl">Router(config-if)#ip address 192.168.10.1
+</span></span><span class="line"><span class="cl">% Incomplete command.
+</span></span><span class="line"><span class="cl">Router(config-if)#ip address 192.168.10.1 255.255.255.0
+</span></span><span class="line"><span class="cl">Router(config-if)#exit
+</span></span><span class="line"><span class="cl">Router(config)#
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来开始对路由器 <code>f0/0</code> 接口进行 DHCP 地址池的配置：<br></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Router(config)#ip dhcp pool SJTU-101                       //设置地址池名称
+</span></span><span class="line"><span class="cl">Router(dhcp-config)#de
+</span></span><span class="line"><span class="cl">Router(dhcp-config)#default-router 192.168.10.1            //设置地址池默认网关
+</span></span><span class="line"><span class="cl">Router(dhcp-config)#net
+</span></span><span class="line"><span class="cl">Router(dhcp-config)#network 192.168.10.0 255.255.255.0     //设置地址池网段，必须和网关同一个网段
+</span></span><span class="line"><span class="cl">Router(dhcp-config)#dns
+</span></span><span class="line"><span class="cl">Router(dhcp-config)#dns-server 1.1.1.1                     //设置DNS服务器
+</span></span><span class="line"><span class="cl">Router(dhcp-config)#exit
+</span></span><span class="line"><span class="cl">Router(config)#
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>配置完成后进入“配置”界面，将 IP 配置由静态改为 DHCP：<br></p>
+<p><img src="https://krseoul.imgtbl.com/i/2024/12/01/674c2073053d2.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Cisco_2_4.png"
+	
+	
+><br></p>
+<p>进入 桌面 &raquo; 命令提示符，键入 <code>ipconfig</code> 可以见到以下信息：<br></p>
+<p><img src="https://krseoul.imgtbl.com/i/2024/12/01/674c207305311.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Cisco_2_5.png"
+	
+	
+><br></p>
+<p>配置完一个端口后，我们回到与console线相连的终端设备的终端界面，进行另一个端口的配置：<br></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Router&gt;en
+</span></span><span class="line"><span class="cl">Router#conf t
+</span></span><span class="line"><span class="cl">Enter configuration commands, one per line.  End with CNTL/Z.
+</span></span><span class="line"><span class="cl">Router(config)#int f0/1
+</span></span><span class="line"><span class="cl">Router(config-if)#no shut
+</span></span><span class="line"><span class="cl">Router(config-if)#no shutdown 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Router(config-if)#
+</span></span><span class="line"><span class="cl">%LINK-5-CHANGED: Interface FastEthernet0/1, changed state to up
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Router(config-if)#ip add
+</span></span><span class="line"><span class="cl">Router(config-if)#ip address 192.168.11.1 255.255.255.0	
+</span></span><span class="line"><span class="cl">Router(config-if)#exit
+</span></span><span class="line"><span class="cl">Router(config)#ip dhcp pool SJTU-102
+</span></span><span class="line"><span class="cl">Router(dhcp-config)#de
+</span></span><span class="line"><span class="cl">Router(dhcp-config)#default-router 192.168.11.1
+</span></span><span class="line"><span class="cl">Router(dhcp-config)#net
+</span></span><span class="line"><span class="cl">Router(dhcp-config)#network 192.168.11.0 255.255.255.0
+</span></span><span class="line"><span class="cl">Router(dhcp-config)#dns
+</span></span><span class="line"><span class="cl">Router(dhcp-config)#dns-server 1.1.1.1
+</span></span><span class="line"><span class="cl">Router(dhcp-config)#exit
+</span></span><span class="line"><span class="cl">Router(config)#
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>并对接口另一端的终端设备进行与上文相同的操作。<br>
+配置完成后可以通过以下命令查看配置信息：<br></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">Router</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="c1">#do show ip int bri</span>
+</span></span><span class="line"><span class="cl"><span class="n">Interface</span>              <span class="ne">IP</span><span class="o">-</span><span class="n">Address</span>      <span class="n">OK</span><span class="err">?</span> <span class="n">Method</span> <span class="n">Status</span>                <span class="n">Protocol</span> 
+</span></span><span class="line"><span class="cl"><span class="n">FastEthernet0</span><span class="o">/</span><span class="mi">0</span>        <span class="mf">192.168</span><span class="o">.</span><span class="mf">10.1</span>    <span class="n">YES</span> <span class="n">manual</span> <span class="n">up</span>                    <span class="n">up</span> 
+</span></span><span class="line"><span class="cl"><span class="n">FastEthernet0</span><span class="o">/</span><span class="mi">1</span>        <span class="mf">192.168</span><span class="o">.</span><span class="mf">11.1</span>    <span class="n">YES</span> <span class="n">manual</span> <span class="n">up</span>                    <span class="n">up</span> 
+</span></span><span class="line"><span class="cl"><span class="n">Vlan1</span>                  <span class="n">unassigned</span>      <span class="n">YES</span> <span class="n">unset</span>  
+</span></span><span class="line"><span class="cl"><span class="n">administratively</span> <span class="n">down</span> <span class="n">down</span>
+</span></span><span class="line"><span class="cl"><span class="n">Router</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="n">Router</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="c1">#do show ip int</span>
+</span></span><span class="line"><span class="cl"><span class="n">FastEthernet0</span><span class="o">/</span><span class="mi">0</span> <span class="n">is</span> <span class="n">up</span><span class="p">,</span> <span class="n">line</span> <span class="n">protocol</span> <span class="n">is</span> <span class="n">up</span> <span class="p">(</span><span class="n">connected</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Internet</span> <span class="n">address</span> <span class="n">is</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">10.1</span><span class="o">/</span><span class="mi">24</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Broadcast</span> <span class="n">address</span> <span class="n">is</span> <span class="mf">255.255</span><span class="o">.</span><span class="mf">255.255</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Address</span> <span class="n">determined</span> <span class="n">by</span> <span class="n">setup</span> <span class="n">command</span>
+</span></span><span class="line"><span class="cl">  <span class="n">MTU</span> <span class="n">is</span> <span class="mi">1500</span> <span class="n">bytes</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Helper</span> <span class="n">address</span> <span class="n">is</span> <span class="ow">not</span> <span class="n">set</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Directed</span> <span class="n">broadcast</span> <span class="n">forwarding</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Outgoing</span> <span class="n">access</span> <span class="n">list</span> <span class="n">is</span> <span class="ow">not</span> <span class="n">set</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Inbound</span>  <span class="n">access</span> <span class="n">list</span> <span class="n">is</span> <span class="ow">not</span> <span class="n">set</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Proxy</span> <span class="n">ARP</span> <span class="n">is</span> <span class="n">enabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Security</span> <span class="n">level</span> <span class="n">is</span> <span class="n">default</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Split</span> <span class="n">horizon</span> <span class="n">is</span> <span class="n">enabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ICMP</span> <span class="n">redirects</span> <span class="n">are</span> <span class="n">always</span> <span class="n">sent</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ICMP</span> <span class="n">unreachables</span> <span class="n">are</span> <span class="n">always</span> <span class="n">sent</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ICMP</span> <span class="n">mask</span> <span class="n">replies</span> <span class="n">are</span> <span class="n">never</span> <span class="n">sent</span>
+</span></span><span class="line"><span class="cl">  <span class="ne">IP</span> <span class="n">fast</span> <span class="n">switching</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="ne">IP</span> <span class="n">fast</span> <span class="n">switching</span> <span class="n">on</span> <span class="n">the</span> <span class="n">same</span> <span class="n">interface</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="ne">IP</span> <span class="n">Flow</span> <span class="n">switching</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="ne">IP</span> <span class="n">Fast</span> <span class="n">switching</span> <span class="n">turbo</span> <span class="n">vector</span>
+</span></span><span class="line"><span class="cl">  <span class="ne">IP</span> <span class="n">multicast</span> <span class="n">fast</span> <span class="n">switching</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="ne">IP</span> <span class="n">multicast</span> <span class="n">distributed</span> <span class="n">fast</span> <span class="n">switching</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Router</span> <span class="n">Discovery</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="ne">IP</span> <span class="n">output</span> <span class="n">packet</span> <span class="n">accounting</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="ne">IP</span> <span class="n">access</span> <span class="n">violation</span> <span class="n">accounting</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">TCP</span><span class="o">/</span><span class="ne">IP</span> <span class="n">header</span> <span class="n">compression</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">RTP</span><span class="o">/</span><span class="ne">IP</span> <span class="n">header</span> <span class="n">compression</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Probe</span> <span class="n">proxy</span> <span class="n">name</span> <span class="n">replies</span> <span class="n">are</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Policy</span> <span class="n">routing</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Network</span> <span class="n">address</span> <span class="n">translation</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">BGP</span> <span class="n">Policy</span> <span class="n">Mapping</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="ne">Input</span> <span class="n">features</span><span class="p">:</span> <span class="n">MCI</span> <span class="n">Check</span>
+</span></span><span class="line"><span class="cl">  <span class="n">WCCP</span> <span class="n">Redirect</span> <span class="n">outbound</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">WCCP</span> <span class="n">Redirect</span> <span class="n">inbound</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">WCCP</span> <span class="n">Redirect</span> <span class="n">exclude</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl"><span class="n">FastEthernet0</span><span class="o">/</span><span class="mi">1</span> <span class="n">is</span> <span class="n">up</span><span class="p">,</span> <span class="n">line</span> <span class="n">protocol</span> <span class="n">is</span> <span class="n">up</span> <span class="p">(</span><span class="n">connected</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Internet</span> <span class="n">address</span> <span class="n">is</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">11.1</span><span class="o">/</span><span class="mi">24</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Broadcast</span> <span class="n">address</span> <span class="n">is</span> <span class="mf">255.255</span><span class="o">.</span><span class="mf">255.255</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Address</span> <span class="n">determined</span> <span class="n">by</span> <span class="n">setup</span> <span class="n">command</span>
+</span></span><span class="line"><span class="cl">  <span class="n">MTU</span> <span class="n">is</span> <span class="mi">1500</span> <span class="n">bytes</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Helper</span> <span class="n">address</span> <span class="n">is</span> <span class="ow">not</span> <span class="n">set</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Directed</span> <span class="n">broadcast</span> <span class="n">forwarding</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Outgoing</span> <span class="n">access</span> <span class="n">list</span> <span class="n">is</span> <span class="ow">not</span> <span class="n">set</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Inbound</span>  <span class="n">access</span> <span class="n">list</span> <span class="n">is</span> <span class="ow">not</span> <span class="n">set</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Proxy</span> <span class="n">ARP</span> <span class="n">is</span> <span class="n">enabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Security</span> <span class="n">level</span> <span class="n">is</span> <span class="n">default</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Split</span> <span class="n">horizon</span> <span class="n">is</span> <span class="n">enabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ICMP</span> <span class="n">redirects</span> <span class="n">are</span> <span class="n">always</span> <span class="n">sent</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ICMP</span> <span class="n">unreachables</span> <span class="n">are</span> <span class="n">always</span> <span class="n">sent</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ICMP</span> <span class="n">mask</span> <span class="n">replies</span> <span class="n">are</span> <span class="n">never</span> <span class="n">sent</span>
+</span></span><span class="line"><span class="cl">  <span class="ne">IP</span> <span class="n">fast</span> <span class="n">switching</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="ne">IP</span> <span class="n">fast</span> <span class="n">switching</span> <span class="n">on</span> <span class="n">the</span> <span class="n">same</span> <span class="n">interface</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="ne">IP</span> <span class="n">Flow</span> <span class="n">switching</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="ne">IP</span> <span class="n">Fast</span> <span class="n">switching</span> <span class="n">turbo</span> <span class="n">vector</span>
+</span></span><span class="line"><span class="cl">  <span class="ne">IP</span> <span class="n">multicast</span> <span class="n">fast</span> <span class="n">switching</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="ne">IP</span> <span class="n">multicast</span> <span class="n">distributed</span> <span class="n">fast</span> <span class="n">switching</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Router</span> <span class="n">Discovery</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="ne">IP</span> <span class="n">output</span> <span class="n">packet</span> <span class="n">accounting</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="ne">IP</span> <span class="n">access</span> <span class="n">violation</span> <span class="n">accounting</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">TCP</span><span class="o">/</span><span class="ne">IP</span> <span class="n">header</span> <span class="n">compression</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">RTP</span><span class="o">/</span><span class="ne">IP</span> <span class="n">header</span> <span class="n">compression</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Probe</span> <span class="n">proxy</span> <span class="n">name</span> <span class="n">replies</span> <span class="n">are</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Policy</span> <span class="n">routing</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Network</span> <span class="n">address</span> <span class="n">translation</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">BGP</span> <span class="n">Policy</span> <span class="n">Mapping</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="ne">Input</span> <span class="n">features</span><span class="p">:</span> <span class="n">MCI</span> <span class="n">Check</span>
+</span></span><span class="line"><span class="cl">  <span class="n">WCCP</span> <span class="n">Redirect</span> <span class="n">outbound</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">WCCP</span> <span class="n">Redirect</span> <span class="n">inbound</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="n">WCCP</span> <span class="n">Redirect</span> <span class="n">exclude</span> <span class="n">is</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl"><span class="n">Vlan1</span> <span class="n">is</span> <span class="n">administratively</span> <span class="n">down</span><span class="p">,</span> <span class="n">line</span> <span class="n">protocol</span> <span class="n">is</span> <span class="n">down</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Internet</span> <span class="n">protocol</span> <span class="n">processing</span> <span class="n">disabled</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Router</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="n">Router</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="c1">#do show run</span>
+</span></span><span class="line"><span class="cl"><span class="n">Building</span> <span class="n">configuration</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Current</span> <span class="n">configuration</span> <span class="p">:</span> <span class="mi">795</span> <span class="n">bytes</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="n">version</span> <span class="mf">12.4</span>
+</span></span><span class="line"><span class="cl"><span class="n">no</span> <span class="n">service</span> <span class="n">timestamps</span> <span class="nb">log</span> <span class="n">datetime</span> <span class="n">msec</span>
+</span></span><span class="line"><span class="cl"><span class="n">no</span> <span class="n">service</span> <span class="n">timestamps</span> <span class="n">debug</span> <span class="n">datetime</span> <span class="n">msec</span>
+</span></span><span class="line"><span class="cl"><span class="n">no</span> <span class="n">service</span> <span class="n">password</span><span class="o">-</span><span class="n">encryption</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="n">hostname</span> <span class="n">Router</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">dhcp</span> <span class="n">pool</span> <span class="n">SJTU</span><span class="o">-</span><span class="mi">101</span>
+</span></span><span class="line"><span class="cl"> <span class="n">network</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">10.0</span> <span class="mf">255.255</span><span class="o">.</span><span class="mf">255.0</span>
+</span></span><span class="line"><span class="cl"> <span class="n">default</span><span class="o">-</span><span class="n">router</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">10.1</span>
+</span></span><span class="line"><span class="cl"> <span class="n">dns</span><span class="o">-</span><span class="n">server</span> <span class="mf">1.1</span><span class="o">.</span><span class="mf">1.1</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">dhcp</span> <span class="n">pool</span> <span class="n">SJTU</span><span class="o">-</span><span class="mi">102</span>
+</span></span><span class="line"><span class="cl"> <span class="n">network</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">11.0</span> <span class="mf">255.255</span><span class="o">.</span><span class="mf">255.0</span>
+</span></span><span class="line"><span class="cl"> <span class="n">default</span><span class="o">-</span><span class="n">router</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">11.1</span>
+</span></span><span class="line"><span class="cl"> <span class="n">dns</span><span class="o">-</span><span class="n">server</span> <span class="mf">1.1</span><span class="o">.</span><span class="mf">1.1</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">cef</span>
+</span></span><span class="line"><span class="cl"><span class="n">no</span> <span class="n">ipv6</span> <span class="n">cef</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="n">spanning</span><span class="o">-</span><span class="n">tree</span> <span class="n">mode</span> <span class="n">pvst</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="n">interface</span> <span class="n">FastEthernet0</span><span class="o">/</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl"> <span class="n">ip</span> <span class="n">address</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">10.1</span> <span class="mf">255.255</span><span class="o">.</span><span class="mf">255.0</span>
+</span></span><span class="line"><span class="cl"> <span class="n">duplex</span> <span class="n">auto</span>
+</span></span><span class="line"><span class="cl"> <span class="n">speed</span> <span class="n">auto</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="n">interface</span> <span class="n">FastEthernet0</span><span class="o">/</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"> <span class="n">ip</span> <span class="n">address</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">11.1</span> <span class="mf">255.255</span><span class="o">.</span><span class="mf">255.0</span>
+</span></span><span class="line"><span class="cl"> <span class="n">duplex</span> <span class="n">auto</span>
+</span></span><span class="line"><span class="cl"> <span class="n">speed</span> <span class="n">auto</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="n">interface</span> <span class="n">Vlan1</span>
+</span></span><span class="line"><span class="cl"> <span class="n">no</span> <span class="n">ip</span> <span class="n">address</span>
+</span></span><span class="line"><span class="cl"> <span class="n">shutdown</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">classless</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">flow</span><span class="o">-</span><span class="k">export</span> <span class="n">version</span> <span class="mi">9</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="n">line</span> <span class="n">con</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="n">line</span> <span class="n">aux</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="n">line</span> <span class="n">vty</span> <span class="mi">0</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl"> <span class="n">login</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="n">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Router</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="c1">#</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>随后我们开始进行通信测试：<br></p>
+<p><img src="https://krseoul.imgtbl.com/i/2024/12/01/674c272a33800.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Cisco_2_6.png"
+	
+	
+><br></p>
+<p><img src="https://krseoul.imgtbl.com/i/2024/12/01/674c272a5530f.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Cisco_2_7.png"
+	
+	
+><br></p>
+<p>可以看到，两台终端设备处于不同网段（一个处于<code>192.168.10.0/24</code>，一个处于<code>192.168.11.0/24</code>），但却成功实现了跨网段通信。<br></p>
+<p>上述模拟配置（其中一个接口）在现实中的效果是这样的：<br></p>
+<p><img src="https://krseoul.imgtbl.com/i/2024/12/01/674c272a04590.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Reality_1.jpg"
+	
+	
+><br></p>
+<p><img src="https://krseoul.imgtbl.com/i/2024/12/01/674c272a0dbea.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Reality_2.jpg"
+	
+	
+><br></p>
+<p><em>第二节完</em></p>
 <h2 id="heading">
 </h2>
 </section>
